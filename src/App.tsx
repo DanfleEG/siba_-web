@@ -21,7 +21,9 @@ import {
   Twitter,
   Mail,
   MapPin,
-  Brain
+  Brain,
+  Menu,
+  X
 } from 'lucide-react';
 import Projects from './components/Projects';
 import TeamPage from './components/Team';
@@ -30,6 +32,7 @@ import TeamPage from './components/Team';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -38,16 +41,28 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const isHome = location.pathname === '/';
+
+  const navLinks = [
+    { name: 'Qué es SIBA', path: '/#qué-es-siba' },
+    { name: 'Áreas', path: '/#áreas' },
+    { name: 'Integrantes', path: '/integrantes' },
+    { name: 'Proyectos', path: '/proyectos' }
+  ];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'py-4 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800 shadow-sm' 
+      isScrolled || isMobileMenuOpen
+        ? 'py-4 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800 shadow-sm' 
         : 'py-6 bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group relative z-50">
           <div className="relative">
             <div className="absolute -inset-1 bg-brand/20 rounded-full blur-sm group-hover:bg-brand/30 transition-all"></div>
             <img 
@@ -60,13 +75,9 @@ const Navbar = () => {
           <span className="font-display font-bold text-2xl tracking-tight text-white group-hover:text-brand transition-colors">SIBA</span>
         </Link>
 
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          {[
-            { name: 'Qué es SIBA', path: '/#qué-es-siba' },
-            { name: 'Áreas', path: '/#áreas' },
-            { name: 'Integrantes', path: '/integrantes' },
-            { name: 'Proyectos', path: '/proyectos' }
-          ].map((item) => (
+          {navLinks.map((item) => (
             item.path.startsWith('/#') ? (
               <a 
                 key={item.name} 
@@ -91,12 +102,63 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 relative z-50">
           <button className="hidden sm:block px-5 py-2 bg-brand text-white rounded-full text-sm font-semibold hover:bg-brand-dark transition-all shadow-lg shadow-brand/20">
             Contáctanos
           </button>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden bg-slate-950 border-b border-slate-800 overflow-hidden"
+          >
+            <div className="px-6 py-8 flex flex-col gap-6">
+              {navLinks.map((item) => (
+                item.path.startsWith('/#') ? (
+                  <a 
+                    key={item.name} 
+                    href={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-xl font-display font-medium text-slate-300 hover:text-brand transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link 
+                    key={item.name} 
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-xl font-display font-medium transition-colors ${
+                      location.pathname === item.path ? 'text-brand' : 'text-slate-300 hover:text-brand'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              ))}
+              <button className="mt-4 w-full py-4 bg-brand text-white rounded-2xl font-bold shadow-lg shadow-brand/20">
+                Contáctanos
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
