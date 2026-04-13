@@ -62,7 +62,7 @@ export default function Projects() {
     : projectsData.filter(p => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       {/* Header Section */}
       <section className="bg-slate-950 pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -100,7 +100,7 @@ export default function Projects() {
       </section>
 
       {/* Filter Section */}
-      <section className="py-12 border-b border-slate-100 dark:border-slate-800 sticky top-20 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md z-30">
+      <section className="py-12 border-b border-slate-800 sticky top-20 bg-slate-950/80 backdrop-blur-md z-30">
         <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center gap-4">
           {categories.map((cat) => (
             <button
@@ -109,7 +109,7 @@ export default function Projects() {
               className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
                 activeCategory === cat 
                   ? 'bg-brand text-white shadow-lg shadow-brand/20' 
-                  : 'bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+                  : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
               }`}
             >
               {cat}
@@ -127,7 +127,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl transition-all"
+              className="group bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden hover:shadow-2xl transition-all"
             >
               <div className="aspect-video relative overflow-hidden">
                 <img 
@@ -153,16 +153,16 @@ export default function Projects() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-[10px] font-bold uppercase tracking-widest mb-4">
                   {project.category}
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-4 dark:text-white group-hover:text-brand transition-colors">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white group-hover:text-brand transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
                   {project.desc}
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-8">
                   {project.tech.map((t) => (
-                    <span key={t} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-md text-[10px] font-medium">
+                    <span key={t} className="px-3 py-1 bg-slate-800 text-slate-400 rounded-md text-[10px] font-medium">
                       {t}
                     </span>
                   ))}

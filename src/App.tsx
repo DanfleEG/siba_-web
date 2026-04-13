@@ -28,7 +28,7 @@ import TeamPage from './components/Team';
 
 // --- Components ---
 
-const Navbar = ({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => void }) => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
@@ -43,7 +43,7 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'py-4 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800 shadow-sm' 
+        ? 'py-4 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800 shadow-sm' 
         : 'py-6 bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -53,11 +53,11 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
             <img 
               src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" 
               alt="SIBA Logo" 
-              className="relative w-10 h-10 object-contain dark:invert"
+              className="relative w-10 h-10 object-contain"
               referrerPolicy="no-referrer"
             />
           </div>
-          <span className="font-display font-bold text-2xl tracking-tight dark:text-white group-hover:text-brand transition-colors">SIBA</span>
+          <span className="font-display font-bold text-2xl tracking-tight text-white group-hover:text-brand transition-colors">SIBA</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -72,8 +72,8 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
                 key={item.name} 
                 href={item.path}
                 className={`text-sm font-medium transition-colors ${
-                  isScrolled || !isHome ? 'text-slate-600 dark:text-slate-400' : 'text-slate-300'
-                } hover:text-brand dark:hover:text-brand`}
+                  isScrolled || !isHome ? 'text-slate-400' : 'text-slate-300'
+                } hover:text-brand`}
               >
                 {item.name}
               </a>
@@ -82,8 +82,8 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
                 key={item.name} 
                 to={item.path}
                 className={`text-sm font-medium transition-colors ${
-                  location.pathname === item.path ? 'text-brand' : (isScrolled || !isHome ? 'text-slate-600 dark:text-slate-400' : 'text-slate-300')
-                } hover:text-brand dark:hover:text-brand`}
+                  location.pathname === item.path ? 'text-brand' : (isScrolled || !isHome ? 'text-slate-400' : 'text-slate-300')
+                } hover:text-brand`}
               >
                 {item.name}
               </Link>
@@ -92,14 +92,6 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
         </div>
 
         <div className="flex items-center gap-4">
-          <button 
-            onClick={toggleTheme}
-            className={`p-2 rounded-full transition-colors ${
-              isScrolled || !isHome ? 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400' : 'hover:bg-white/10 text-white'
-            }`}
-          >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
           <button className="hidden sm:block px-5 py-2 bg-brand text-white rounded-full text-sm font-semibold hover:bg-brand-dark transition-all shadow-lg shadow-brand/20">
             Contáctanos
           </button>
@@ -187,13 +179,13 @@ const About = () => {
           transition={{ duration: 0.8 }}
         >
           <span className="text-brand font-bold text-sm uppercase tracking-widest mb-4 block">Sobre Nosotros</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 dark:text-white">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
             ¿Qué es <span className="text-brand">SIBA</span>?
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
-            SIBA es el <span className="font-semibold text-slate-900 dark:text-white">Semillero de Investigación en Business Analytics</span>, un espacio académico donde estudiantes apasionados por los datos se reúnen para investigar, aprender y crear soluciones basadas en analítica de negocios.
+          <p className="text-slate-400 text-lg leading-relaxed mb-8">
+            SIBA es el <span className="font-semibold text-white">Semillero de Investigación en Business Analytics</span>, un espacio académico donde estudiantes apasionados por los datos se reúnen para investigar, aprender y crear soluciones basadas en analítica de negocios.
           </p>
-          <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
+          <p className="text-slate-400 text-lg leading-relaxed mb-8">
             Trabajamos en proyectos de Data Science, Business Intelligence y Analytics aplicados a problemas reales, desarrollando competencias técnicas y pensamiento analítico crítico.
           </p>
 
@@ -208,8 +200,8 @@ const About = () => {
                   {item.icon}
                 </div>
                 <div>
-                  <h4 className="font-bold dark:text-white">{item.title}</h4>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">{item.desc}</p>
+                  <h4 className="font-bold text-white">{item.title}</h4>
+                  <p className="text-sm text-slate-400">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -231,7 +223,7 @@ const About = () => {
               referrerPolicy="no-referrer"
             />
           </div>
-          <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800">
+          <div className="absolute -bottom-6 -right-6 bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-800">
             <div className="text-4xl font-display font-bold text-brand mb-1">+20</div>
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500">Proyectos realizados</div>
           </div>
@@ -269,12 +261,12 @@ const Areas = () => {
   ];
 
   return (
-    <section id="áreas" className="bg-slate-50 dark:bg-slate-900/50 py-20 md:py-32">
+    <section id="áreas" className="bg-slate-900/50 py-20 md:py-32">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-brand font-bold text-sm uppercase tracking-widest mb-4 block">Lo que hacemos</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 dark:text-white">Nuestras Áreas</h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Nuestras Áreas</h2>
+          <p className="text-slate-400 text-lg">
             Exploramos las disciplinas clave del ecosistema de datos para formar analistas integrales.
           </p>
         </div>
@@ -287,13 +279,13 @@ const Areas = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white dark:bg-slate-950 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 hover:border-brand/30 dark:hover:border-brand/30 transition-all hover:shadow-xl group"
+              className="bg-slate-950 p-8 rounded-3xl border border-slate-800 hover:border-brand/30 transition-all hover:shadow-xl group"
             >
               <div className="w-12 h-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {area.icon}
               </div>
-              <h3 className="text-xl font-bold mb-4 dark:text-white">{area.title}</h3>
-              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 text-white">{area.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
                 {area.desc}
               </p>
             </motion.div>
@@ -317,8 +309,8 @@ const Team = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div className="max-w-2xl">
           <span className="text-brand font-bold text-sm uppercase tracking-widest mb-4 block">Quiénes somos</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 dark:text-white">Nuestro Equipo</h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Nuestro Equipo</h2>
+          <p className="text-slate-400 text-lg">
             Personas apasionadas por los datos, comprometidas con la investigación y el aprendizaje continuo.
           </p>
         </div>
@@ -357,7 +349,7 @@ const Team = () => {
                 </div>
               </div>
             </div>
-            <h4 className="font-bold text-lg dark:text-white">{member.name}</h4>
+            <h4 className="font-bold text-lg text-white">{member.name}</h4>
             <p className="text-xs font-bold uppercase tracking-widest text-brand">{member.role}</p>
           </motion.div>
         ))}
@@ -376,7 +368,7 @@ const Footer = () => {
               <img 
                 src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" 
                 alt="SIBA Logo" 
-                className="w-10 h-10 object-contain invert"
+                className="w-10 h-10 object-contain"
                 referrerPolicy="no-referrer"
               />
               <span className="font-display font-bold text-2xl tracking-tight text-white">SIBA</span>
@@ -446,22 +438,14 @@ const Home = () => {
 };
 
 export default function App() {
-  const [isDark, setIsDark] = useState(true);
-
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
-
-  const toggleTheme = () => setIsDark(!isDark);
+    document.documentElement.classList.add('dark');
+  }, []);
 
   return (
     <Router>
       <div className="min-h-screen transition-colors duration-300">
-        <Navbar isDark={isDark} toggleTheme={toggleTheme} />
+        <Navbar />
         
         <main>
           <Routes>

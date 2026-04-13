@@ -29,11 +29,11 @@ const allMembers = [
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       {/* Header Section */}
       <section className="bg-slate-950 pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:40px_40px]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#0088ff_1px,transparent_1px)] [background-size:40px_40px]"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -63,7 +63,7 @@ export default function TeamPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: (i % 4) * 0.1 }}
-              className="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl transition-all"
+              className="group bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden hover:shadow-2xl transition-all"
             >
               <div className="aspect-[3/4] relative overflow-hidden">
                 <img 
@@ -84,9 +84,9 @@ export default function TeamPage() {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold dark:text-white mb-1">{member.name}</h3>
+                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
                 <p className="text-xs font-bold uppercase tracking-widest text-brand mb-4">{member.role}</p>
-                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+                <div className="flex items-center gap-2 text-slate-400 text-sm">
                   <Mail size={14} className="text-brand" />
                   <span>{member.social}</span>
                 </div>
