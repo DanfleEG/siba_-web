@@ -9,7 +9,7 @@ const allMembers = [
   { name: 'Lucero', role: 'Líder de Data Engineering', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@mherrera_de' },
   
   // More members (total 20)
-  { name: 'Andrés Mendoza', role: 'Analista de Datos', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@amendoza' },
+  { name: 'Alejandro Salvador', role: 'IA Engineering', img: '/src/assets/images/alejandro_salvador.png', linkedin: '#', social: '@amendoza' },
   { name: 'Sofía Rivas', role: 'ML Engineer', img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@sofia_ml' },
   { name: 'Carlos Ruiz', role: 'BI Developer', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@cruiz_bi' },
   { name: 'Valentina Ortiz', role: 'Data Analyst', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@vale_data' },
