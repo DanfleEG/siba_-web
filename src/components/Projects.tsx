@@ -17,7 +17,7 @@ const projectsData = [
     category: 'Data Science & ML',
     year: '2023',
     subsidized: true,
-    img: 'https://images.unsplash.com/photo-1551288049-bbbda546697a?auto=format&fit=crop&w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
     tech: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas']
   },
   {

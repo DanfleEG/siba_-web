@@ -3,10 +3,10 @@ import { Linkedin, Twitter, Mail, ExternalLink } from 'lucide-react';
 
 const allMembers = [
   // Leads (shown on home too)
-  { name: 'Laura Gómez', role: 'Directora de Data Science', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@laurag_ds' },
-  { name: 'Felipe Castillo', role: 'Coordinador de BI', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@felipe_bi' },
-  { name: 'Isabella Vargas', role: 'Líder de Analytics', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@isav_analytics' },
-  { name: 'Mateo Herrera', role: 'Líder de Data Engineering', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@mherrera_de' },
+  { name: 'Fabiana Rojas', role: 'Presidenta', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@laurag_ds' },
+  { name: 'Danae ', role: 'Vicepresidenta', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@felipe_bi' },
+  { name: 'Danilo Estrella', role: 'Líder de RR. HH.', img: '/src/assets/images/danilo_estrella.svg', linkedin: 'https://www.linkedin.com/in/danilo-estrella-guerra-9b26a92a5', social: 'https://porfolio.danflylab.space' },
+  { name: 'Lucero', role: 'Líder de Data Engineering', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@mherrera_de' },
   
   // More members (total 20)
   { name: 'Andrés Mendoza', role: 'Analista de Datos', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80', linkedin: '#', social: '@amendoza' },

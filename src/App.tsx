@@ -66,7 +66,7 @@ const Navbar = () => {
           <div className="relative">
             <div className="absolute -inset-1 bg-brand/20 rounded-full blur-sm group-hover:bg-brand/30 transition-all"></div>
             <img 
-              src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" 
+              src="/src/assets/icons/logo.svg"
               alt="SIBA Logo" 
               className="relative w-10 h-10 object-contain"
               referrerPolicy="no-referrer"
@@ -279,7 +279,7 @@ const About = () => {
         >
           <div className="rounded-3xl overflow-hidden shadow-2xl">
             <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" 
+              src="/src/assets/images/nueva_generacion.jpeg" 
               alt="SIBA Team Group" 
               className="w-full h-auto"
               referrerPolicy="no-referrer"
@@ -302,22 +302,22 @@ const Areas = () => {
   const areas = [
     { 
       icon: <BarChart3 />, 
-      title: 'Business Intelligence', 
+      title: 'Recursos Humanos', 
       desc: 'Transformamos datos en decisiones estratégicas. Diseñamos dashboards, KPIs y reportes que impulsan el negocio.' 
     },
     { 
       icon: <Database />, 
-      title: 'Data Science & ML', 
+      title: 'Asuntos Académicos', 
       desc: 'Construimos modelos predictivos y algoritmos de machine learning aplicados a problemas reales de negocio.' 
     },
     { 
       icon: <Cpu />, 
-      title: 'Data Engineering', 
+      title: 'Imagen y Relaciones', 
       desc: 'Diseñamos pipelines de datos robustos, arquitecturas de almacenamiento y procesos ETL escalables.' 
     },
     { 
       icon: <LineChart />, 
-      title: 'Analytics & Estrategia', 
+      title: 'Proyectos', 
       desc: 'Aplicamos análisis estadístico avanzado para descubrir patrones y generar insights accionables.' 
     }
   ];
@@ -363,7 +363,7 @@ const Team = () => {
     { name: 'Laura Gómez', role: 'Directora de Data Science', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80' },
     { name: 'Felipe Castillo', role: 'Coordinador de BI', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80' },
     { name: 'Isabella Vargas', role: 'Líder de Analytics', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Mateo Herrera', role: 'Líder de Data Engineering', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80' }
+    { name: 'Danilo Estrella', role: 'Líder de RR. HH.', img: '/src/assets/images/danilo_estrella.svg' }
   ];
 
   return (
@@ -428,7 +428,7 @@ const Footer = () => {
           <div className="col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <img 
-                src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" 
+                src="/src/assets/icons/logo.svg" 
                 alt="SIBA Logo" 
                 className="w-10 h-10 object-contain"
                 referrerPolicy="no-referrer"
