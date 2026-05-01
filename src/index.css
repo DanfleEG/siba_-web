@@ -9,6 +9,14 @@
   --color-brand-dark: #0066cc;
 }
 
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

@@ -3,9 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
   BarChart3,
   Database, 
@@ -27,8 +27,19 @@ import {
 } from 'lucide-react';
 import Projects from './components/Projects';
 import TeamPage from './components/Team';
+import ProjectDetail from './components/ProjectDetail';
+import SemilleroLife from './components/SemilleroLife';
+import LifePage from './components/LifePage';
 
 // --- Components ---
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,6 +62,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Qué es SIBA', path: '/#qué-es-siba' },
     { name: 'Áreas', path: '/#áreas' },
+    { name: 'Vida', path: '/vida' },
     { name: 'Integrantes', path: '/integrantes' },
     { name: 'Proyectos', path: '/proyectos' }
   ];
@@ -66,7 +78,7 @@ const Navbar = () => {
           <div className="relative">
             <div className="absolute -inset-1 bg-brand/20 rounded-full blur-sm group-hover:bg-brand/30 transition-all"></div>
             <img 
-              src="/src/assets/icons/logo.svg"
+              src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" 
               alt="SIBA Logo" 
               className="relative w-10 h-10 object-contain"
               referrerPolicy="no-referrer"
@@ -279,7 +291,7 @@ const About = () => {
         >
           <div className="rounded-3xl overflow-hidden shadow-2xl">
             <img 
-              src="/src/assets/images/nueva_generacion.jpeg" 
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" 
               alt="SIBA Team Group" 
               className="w-full h-auto"
               referrerPolicy="no-referrer"
@@ -302,22 +314,22 @@ const Areas = () => {
   const areas = [
     { 
       icon: <BarChart3 />, 
-      title: 'Recursos Humanos', 
+      title: 'Business Intelligence', 
       desc: 'Transformamos datos en decisiones estratégicas. Diseñamos dashboards, KPIs y reportes que impulsan el negocio.' 
     },
     { 
       icon: <Database />, 
-      title: 'Asuntos Académicos', 
+      title: 'Data Science & ML', 
       desc: 'Construimos modelos predictivos y algoritmos de machine learning aplicados a problemas reales de negocio.' 
     },
     { 
       icon: <Cpu />, 
-      title: 'Imagen y Relaciones', 
+      title: 'Data Engineering', 
       desc: 'Diseñamos pipelines de datos robustos, arquitecturas de almacenamiento y procesos ETL escalables.' 
     },
     { 
       icon: <LineChart />, 
-      title: 'Proyectos', 
+      title: 'Analytics & Estrategia', 
       desc: 'Aplicamos análisis estadístico avanzado para descubrir patrones y generar insights accionables.' 
     }
   ];
@@ -363,58 +375,77 @@ const Team = () => {
     { name: 'Laura Gómez', role: 'Directora de Data Science', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80' },
     { name: 'Felipe Castillo', role: 'Coordinador de BI', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80' },
     { name: 'Isabella Vargas', role: 'Líder de Analytics', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Danilo Estrella', role: 'Líder de RR. HH.', img: '/src/assets/images/danilo_estrella.svg' }
+    { name: 'Mateo Herrera', role: 'Líder de Data Engineering', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Andrés Mendoza', role: 'Analista de Datos', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Sofía Rivas', role: 'ML Engineer', img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80' }
   ];
 
-  return (
-    <section id="integrantes" className="section-container">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <div className="max-w-2xl">
-          <span className="text-brand font-bold text-sm uppercase tracking-widest mb-4 block">Quiénes somos</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Nuestro Equipo</h2>
-          <p className="text-slate-400 text-lg">
-            Personas apasionadas por los datos, comprometidas con la investigación y el aprendizaje continuo.
-          </p>
-        </div>
-        <div className="flex gap-4">
-          <Link 
-            to="/integrantes" 
-            className="px-6 py-3 bg-brand/10 text-brand rounded-full font-bold hover:bg-brand hover:text-white transition-all flex items-center gap-2 group"
-          >
-            Ver todos los integrantes
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </div>
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        {members.map((member, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="group"
-          >
-            <div className="aspect-[3/4] rounded-3xl overflow-hidden mb-4 relative">
-              <img 
-                src={member.img} 
-                alt={member.name} 
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <div className="flex gap-3">
-                  <Linkedin size={18} className="text-white cursor-pointer hover:text-brand" />
-                  <Twitter size={18} className="text-white cursor-pointer hover:text-brand" />
-                </div>
-              </div>
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-33.33%"]);
+
+  return (
+    <section id="integrantes" ref={targetRef} className="relative h-[150vh]">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 w-full mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="text-brand font-bold text-sm uppercase tracking-widest mb-4 block">Quiénes somos</span>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white text-balance">Nuestro Equipo <span className="text-brand">Core</span></h2>
+              <p className="text-slate-400 text-lg">
+                Talento excepcional comprometido con la excelencia analítica. Desliza para conocer a los líderes.
+              </p>
             </div>
-            <h4 className="font-bold text-lg text-white">{member.name}</h4>
-            <p className="text-xs font-bold uppercase tracking-widest text-brand">{member.role}</p>
+            <div className="flex gap-4">
+              <Link 
+                to="/integrantes" 
+                className="px-6 py-3 bg-brand/10 text-brand rounded-full font-bold hover:bg-brand hover:text-white transition-all flex items-center gap-2 group"
+              >
+                Todos los integrantes
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative w-full overflow-hidden">
+          <motion.div 
+            style={{ x }}
+            className="flex gap-6 px-6 md:px-[calc((100vw-1280px)/2+24px)]"
+          >
+            {members.map((member, i) => (
+              <motion.div
+                key={i}
+                className="min-w-[240px] md:min-w-[300px] group"
+              >
+                <div className="aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden mb-4 relative shadow-2xl border border-slate-800">
+                  <img 
+                    src={member.img} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex flex-col justify-end p-6 md:p-8">
+                    <h4 className="font-bold text-xl md:text-2xl text-white mb-0.5 md:mb-1">{member.name}</h4>
+                    <p className="text-[10px] md:text-sm font-bold uppercase tracking-widest text-brand">{member.role}</p>
+                    
+                    <div className="mt-4 flex gap-2 md:gap-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-300">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand transition-colors cursor-pointer">
+                        <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
+                      </div>
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-brand transition-colors cursor-pointer">
+                        <Github size={16} className="md:w-[18px] md:h-[18px]" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
-        ))}
+        </div>
       </div>
     </section>
   );
@@ -428,7 +459,7 @@ const Footer = () => {
           <div className="col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <img 
-                src="/src/assets/icons/logo.svg" 
+                src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" 
                 alt="SIBA Logo" 
                 className="w-10 h-10 object-contain"
                 referrerPolicy="no-referrer"
@@ -494,6 +525,7 @@ const Home = () => {
       <Hero />
       <About />
       <Areas />
+      <SemilleroLife />
       <Team />
     </>
   );
@@ -506,6 +538,7 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen transition-colors duration-300">
         <Navbar />
         
@@ -513,7 +546,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/proyectos" element={<Projects />} />
+            <Route path="/proyectos/:projectId" element={<ProjectDetail />} />
             <Route path="/integrantes" element={<TeamPage />} />
+            <Route path="/vida" element={<LifePage />} />
           </Routes>
         </main>
 

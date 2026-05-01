@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
   ArrowRight, 
@@ -11,17 +12,17 @@ import {
 
 const projectsData = [
   {
-    id: 1,
+    id: 'prediccion-churn',
     title: 'Predicción de Churn en Clientes Bancarios',
     desc: 'Modelo de machine learning para identificar clientes con alta probabilidad de abandono en una entidad financiera colombiana.',
     category: 'Data Science & ML',
     year: '2023',
     subsidized: true,
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1551288049-bbbda546697a?auto=format&fit=crop&w=800&q=80',
     tech: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas']
   },
   {
-    id: 2,
+    id: 'dashboard-logistica',
     title: 'Dashboard de Logística para Retail',
     desc: 'Sistema de Business Intelligence para monitoreo en tiempo real de la cadena de suministro de una empresa retail con 12 puntos de venta.',
     category: 'Business Intelligence',
@@ -31,7 +32,7 @@ const projectsData = [
     tech: ['Power BI', 'SQL Server', 'Python', 'DAX']
   },
   {
-    id: 3,
+    id: 'analisis-sentimientos',
     title: 'Análisis de Sentimientos en Redes Sociales',
     desc: 'Herramienta de NLP para monitorear la percepción de marca en Twitter e Instagram para empresas del sector salud.',
     category: 'Data Science & ML',
@@ -41,7 +42,7 @@ const projectsData = [
     tech: ['Python', 'NLTK', 'Transformers', 'FastAPI']
   },
   {
-    id: 4,
+    id: 'pipeline-educativo',
     title: 'Pipeline de Datos para Institución Educativa',
     desc: 'Arquitectura de datos end-to-end para consolidar y analizar información académica de 8,000 estudiantes en una universidad regional.',
     category: 'Data Engineering',
@@ -56,6 +57,7 @@ const categories = ['Todos', 'Data Science & ML', 'Business Intelligence', 'Data
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState('Todos');
+  const navigate = useNavigate();
 
   const filteredProjects = activeCategory === 'Todos' 
     ? projectsData 
@@ -127,7 +129,8 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="group bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden hover:shadow-2xl transition-all"
+              onClick={() => navigate(`/proyectos/${project.id}`)}
+              className="group bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden hover:shadow-2xl transition-all cursor-pointer"
             >
               <div className="aspect-video relative overflow-hidden">
                 <img 
